@@ -45,12 +45,22 @@ object Calendar {
         .setApplicationName(APPLICATION_NAME)
         .build()
 
-    fun createEvent(summary: String, location: String, startDate: Date, endDate: Date): Event =
-        Event()
-            .setSummary(summary)
-            .setLocation(location)
-            .setStart(EventDateTime().setDateTime(DateTime(startDate)))
-            .setEnd(EventDateTime().setDateTime(DateTime(endDate)))
+    fun createEvent(summary: String, location: String, startDate: Date, endDate: Date, colorId: String? = null): Event {
+        return if (colorId == null) {
+            Event()
+                .setSummary(summary)
+                .setLocation(location)
+                .setStart(EventDateTime().setDateTime(DateTime(startDate)))
+                .setEnd(EventDateTime().setDateTime(DateTime(endDate)))
+        } else {
+            Event()
+                .setSummary(summary)
+                .setLocation(location)
+                .setStart(EventDateTime().setDateTime(DateTime(startDate)))
+                .setEnd(EventDateTime().setDateTime(DateTime(endDate)))
+                .setColorId(colorId)
+        }
+    }
 
     fun addEventsToCalendar(calendarId: String, events: List<Event>) {
         val batch = service.batch()

@@ -14,12 +14,13 @@ class AppConfig {
     val calendarId: String
     val startDate: LocalDate
     val ignoreSoftSkills: Boolean
+    val rainbowMode: Boolean
 
     private fun validateGroupId(groupId: String): Boolean {
-        if (groupId.toIntOrNull() != null) {
-            return groupId.length == 5
+        return if (groupId.toIntOrNull() != null) {
+            groupId.length == 5
         } else {
-            return false
+            false
         }
     }
 
@@ -70,6 +71,14 @@ class AppConfig {
         } else {
             ignoreSoftSkills = false
         }
+        print("Do you want your schedule to be colorful? (y/N) ")
+        query = readLine()
+        if (query!!.lowercase() == "y") {
+            println("Enabled rainbow mode!")
+            rainbowMode = true
+        } else {
+            rainbowMode = false
+        }
     }
 
     constructor(args: Array<String>) {
@@ -79,11 +88,13 @@ class AppConfig {
         val calendarIdParse by parser.option(ArgType.String, fullName = "calendarId", shortName = "c", description = "Calendar ID").default("primary")
         val startDateParse by parser.option(ArgType.String, fullName = "startDate", shortName = "d", description = "Start date in format YYYY-MM-DD").default("2021-09-01")
         val ignoreSoftSkillsParse by parser.option(ArgType.Boolean, fullName="ignoreSofts", shortName = "is", description = "Ignore Soft Skills completely").default(false)
+        val rainbowModeParse by parser.option(ArgType.Boolean, fullName="rainbow", shortName = "r", description = "Generate colorful schedule").default(false)
         parser.parse(args)
         facultyId = facultyIdParse
         groupId = groupIdParse
         calendarId = calendarIdParse
         startDate = LocalDate.parse(startDateParse)
         ignoreSoftSkills = ignoreSoftSkillsParse
+        rainbowMode = rainbowModeParse
     }
 }
