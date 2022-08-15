@@ -70,6 +70,7 @@ object Calendar {
         println("Executing batch request...")
         batch.execute()
     }
+
     fun createStandardCalendar(facultyId: Int, groupId: Int): String {
         return service.calendars().insert(com.google.api.services.calendar.model.Calendar()
                 .setSummary("Расписание занятий $facultyId/$groupId")
