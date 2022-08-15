@@ -28,16 +28,16 @@ class AppConfig {
 
     constructor() {
         print("Enter your faculty ID: ")
-        val facultyIdPending = readln()
-        if (validateFacultyId(facultyIdPending)) {
+        val facultyIdPending = readLine()
+        if (validateFacultyId(facultyIdPending!!)) {
             facultyId = facultyIdPending.toInt()
         } else {
             println("Error! Faculty ID is 2 digit number you can find in address bar when opening your calendar. (ruz.spbstu.ru/faculty/[facultyId]/groups/[groupId])")
             exitProcess(1)
         }
         print("Enter your group ID: ")
-        val groupIdPending = readln()
-        if (validateGroupId(groupIdPending)) {
+        val groupIdPending = readLine()
+        if (validateGroupId(groupIdPending!!)) {
             groupId = groupIdPending.toInt()
         } else {
             println("Error! Group ID is 5 digit number you can find in address bar when opening your calendar. (ruz.spbstu.ru/faculty/[facultyId]/groups/[groupId])")
