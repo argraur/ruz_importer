@@ -19,7 +19,7 @@ class App(args: Array<String>) {
             }
         var colorSet = mutableSetOf<Int>()
         val colorMap = mutableMapOf<String, Int>()
-        val vEvents = RuzParser(facultyId = appConfig.facultyId, groupId = appConfig.groupId, startDate = appConfig.startDate).getEvents()
+        val vEvents = RuzParser(facultyId = appConfig.facultyId, groupId = appConfig.groupId, startDate = appConfig.startDate, endDate = appConfig.endDate).getEvents()
         val events = mutableListOf<Event>()
         val calendar = Calendar
         vEvents.forEach {

@@ -13,6 +13,7 @@ class AppConfig {
     val facultyId: Int
     val calendarId: String
     val startDate: LocalDate
+    var endDate: LocalDate = LocalDate.now()
     val ignoreSoftSkills: Boolean
     val rainbowMode: Boolean
 
@@ -51,6 +52,11 @@ class AppConfig {
         }
         print("Enter start date (YYYY-MM-DD): ")
         startDate = LocalDate.parse(readLine())
+        print("Enter end date (YYYY-MM-DD) [Default: LocalDate.now()]: ")
+        val endDateLine = readLine()
+        if (endDateLine!!.isNotEmpty()) {
+            endDate = LocalDate.parse(endDateLine)
+        }
         print("Do you have an existing calendar where you want to import? (Y/n) ")
         var query = readLine()
         if (query!!.isEmpty() || query.lowercase() == "y") {

@@ -9,12 +9,12 @@ import java.time.LocalDate
 import java.time.Period
 import kotlin.streams.toList
 
-class RuzParser(private val facultyId: Int, private val groupId: Int, private val startDate: LocalDate = LocalDate.parse("2021-09-01")) {
+class RuzParser(private val facultyId: Int, private val groupId: Int, private val startDate: LocalDate = LocalDate.parse("2021-09-01"), private val endDate: LocalDate) {
     private val client = OkHttpClient()
 
     fun getEvents(): List<VEvent> {
         val events: MutableList<VEvent> = mutableListOf()
-        val steps = startDate.datesUntil(LocalDate.now(), Period.ofDays(7)).toList()
+        val steps = startDate.datesUntil(endDate, Period.ofDays(7)).toList()
         steps.forEach {
             val request = Request.Builder()
                 .url("https://ruz.spbstu.ru/faculty/$facultyId/groups/$groupId/ical?date=$it")
